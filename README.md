@@ -1,7 +1,7 @@
 µGISS-Extract: OpenStreetMap cities extractor
 =============================================
 
-`mugiss_extract` is a tool for extracting cities boundaries from [OpenStreetMap PBF files](https://wiki.openstreetmap.org/wiki/PBF_Format) and exporting them in a CSV file.
+`mugiss-extract` is a tool for extracting cities boundaries from [OpenStreetMap PBF files](https://wiki.openstreetmap.org/wiki/PBF_Format) and exporting them in a CSV file.
 City extraction is based on the [`boundary`](https://wiki.openstreetmap.org/wiki/Tag:boundary=administrative) and [`admin_level`](https://wiki.openstreetmap.org/wiki/Key:admin_level) tags in OpenStreetMap.
 
 
@@ -20,7 +20,7 @@ $ go build
 ## Usage
 
 ```
-Usage: mugiss_extract [global options] 
+Usage: mugiss-extract [global options] 
 
 Global options:
         -i,     Input OpenStreetMap PBF data file (*)
