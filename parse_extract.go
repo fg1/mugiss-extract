@@ -24,7 +24,7 @@ type Area struct {
 // Transforms a LineString to a Polygon
 func LineToPolygon(g *geos.Geometry) (*geos.Geometry, error) {
 	if d, err := geos.Must(g.StartPoint()).Distance(geos.Must(g.EndPoint())); err != nil {
-		log.Fatal(err)
+		return nil, err
 	} else if d != 0 {
 		return nil, fmt.Errorf("Way collection do not form a ring")
 	}
@@ -40,7 +40,7 @@ func MergeLines(lines []*geos.Geometry) (*geos.Geometry, error) {
 	g := geos.Must(geos.NewCollection(geos.MULTILINESTRING, lines...))
 	g, err := g.LineMerge()
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	n, err := g.NGeometry()

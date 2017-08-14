@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compress/gzip"
 	"encoding/csv"
 	"log"
 	"os"
@@ -15,6 +16,7 @@ func main() {
 		AdminLevel    int    `goptions:"-l, description='Admin level'"`
 		MinAdminLevel int    `goptions:"-m, description='Minimal admin level'"`
 		OutputFile    string `goptions:"-o, obligatory, description='Output CSV data file'"`
+		Compress      bool   `goptions:"-z, description='Compress output file'"`
 	}{
 		AdminLevel:    8,
 		MinAdminLevel: 6,
@@ -33,7 +35,15 @@ func main() {
 	}
 	defer fcsv.Close()
 
-	w := csv.NewWriter(fcsv)
+	var w *csv.Writer
+	if options.Compress {
+		gz := gzip.NewWriter(fcsv)
+		defer gz.Close()
+		w = csv.NewWriter(gz)
+	} else {
+		w = csv.NewWriter(fcsv)
+	}
+
 	w.Comma = '\t'
 	defer w.Flush()
 
